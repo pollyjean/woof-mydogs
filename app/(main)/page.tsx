@@ -34,19 +34,34 @@ export default function Home() {
   }, [isLoading]);
   if (error) return <main>{error}</main>;
   return (
-    <main>
-      <h1>Woof.tv</h1>
-      {isLoading ? null : (
-        <div>
-          <video src={url ? url : data?.url}></video>
-          <div>
-            <button onClick={handleNewDog}>New Dog!</button>
-            <button onClick={handleLike}>
-              {(isLiked ? isLiked : data?.isLiked) ? "Unlike" : "Like"}
-            </button>
+    <main className="flex flex-col items-center">
+      <section>
+        <h1 className="text-gray-100 font-bold text-2xl mb-10">Woof.tv</h1>
+        {isLoading ? null : (
+          <div className="p-6 bg-slate-800 flex flex-col gap-2 items-stretch">
+            <video
+              src={url ? url : data?.url}
+              controls
+              autoPlay
+              className="max-h-96  md:max-w-full w-11/12 m-auto"
+            ></video>
+            <div className="flex gap-2 items-stretch justify-center">
+              <button
+                className="w-80 p-3 text-sm font-semibold bg-gray-50 rounded-md border-2 border-slate-700 hover:border-slate-600 hover:bg-white md:w-5/6"
+                onClick={handleNewDog}
+              >
+                New Dog!
+              </button>
+              <button
+                className="w-80 p-3 text-sm font-semibold bg-blue-400 rounded-md border-2 border-slate-700 hover:border-slate-600 hover:bg-opacity-95 text-white md:w-5/6"
+                onClick={handleLike}
+              >
+                {(isLiked ? isLiked : data?.isLiked) ? "Unlike" : "Like"}
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </section>
     </main>
   );
 }
